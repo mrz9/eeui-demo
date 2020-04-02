@@ -1,156 +1,81 @@
-const eeui = app.requireModule('eeui');
-const locale = app.requireModule('locale') || app.requireModule('local');
+/*
+ * @Author: Dayao
+ * @Date: 2020-02-11 11:20:48
+ * @LastEditTime: 2020-03-10 17:17:42
+ * @Description: 
+ */
+const picker = weex.requireModule('picker')
+import VueI18n from 'vue-i18n'
 
+Vue.use(VueI18n);
+
+// 准备翻译的语言环境信息
+const messages = {
+  en: require('./lang/en.json') ,
+  "zh-cn": require('./lang/zh-cn.json'),
+  km: require('./lang/km.json')
+}
+
+// 通过选项创建 VueI18n 实例
+const i18n = new VueI18n({
+  locale: $Caches.getFreeze('lang','zh-cn'), // 设置地区
+  fallbackLocale: 'zh-cn',
+  silentFallbackWarn: true,
+  messages, // 设置地区信息
+})
+
+// 以mixin的方式挂载到各个页面
 Vue.mixin({
-    data() {
-        return {
-            privateLanguageData: {
-                en: require("./lang/en.js").default,
-                zh: require("./lang/zh.js").default
-            },
-            privateLanguageType: 'system',
-        }
-    },
-
-    created() {
-        this.__loadLanguage();
-        this.__setLanguageListener();
-    },
-
-    methods: {
-        __loadLanguage() {
-            let language = eeui.getCachesString("EEUI_I18N_LANGUAGE", "system");
-            if (language === "system") {
-                this.__getSystemLanguage((syslang) => {
-                    if (syslang === null) syslang = 'zh';
-                    this.privateLanguageType = syslang;
-                });
-            } else {
-                this.privateLanguageType = language;
-            }
-        },
-
-        __parseLanguage(language) {
-            let supportedLanguageRE = /(en|zh)\_?\w*/i;
-            let match = supportedLanguageRE.exec(language + "");
-            if (match && match[1]) {
-                return match[1];
-            }
-            return "";
-        },
-
-        __getSystemLanguage(callback) {
-            try {
-                let useSync = false;
-                let resSync = locale.getLanguage((language) => {
-                    let lang = this.__parseLanguage(language);
-                    if (lang) {
-                        useSync || callback(lang);
-                    } else {
-                        callback(null);
-                    }
-                });
-                let langSync = this.__parseLanguage(resSync);
-                if (langSync) {
-                    useSync = true;
-                    callback(langSync);
-                } else {
-                    callback(null);
-                }
-            } catch (e) {
-                callback(null);
-            }
-        },
-
-        __setLanguageListener() {
-            let pageInfo = eeui.getPageInfo();
-            if (pageInfo && pageInfo['pageName']) {
-                let pageName = pageInfo['pageName'];
-                let listenerName = pageName + "::i18n-change";
-                let listenerLists = [];
-                try {
-                    listenerLists = JSON.parse(eeui.getVariate("__i18n::listener", "[]"));
-                    if (!(listenerLists instanceof Array)) {
-                        listenerLists = [];
-                    }
-                } catch (e) {
-                    listenerLists = [];
-                }
-                if (listenerLists.indexOf(listenerName) === -1) {
-                    listenerLists.push(listenerName);
-                    eeui.setVariate("__i18n::listener", JSON.stringify(listenerLists));
-                }
-                eeui.setPageStatusListener({
-                    pageName: pageName,
-                    listenerName: listenerName,
-                }, (res) => {
-                    if (res.status === listenerName) {
-                        eeui.setCachesString("EEUI_I18N_LANGUAGE", res.extra, 0);
-                        this.__loadLanguage();
-                    }
-                });
-            }
-        },
-
-        /**
-         * 语言包数据
-         * @param language
-         * @param data
-         */
-        addLanguageData(language, data) {
-            if (!language || typeof data !== "object") {
-                return;
-            }
-            if (typeof this.privateLanguageData[language] === "undefined") {
-                this.privateLanguageData[language] = {};
-            }
-            Object.assign(this.privateLanguageData[language], data);
-        },
-
-        /**
-         * 变化语言
-         * @param language
-         */
-        setLanguage(language) {
-            let listenerLists = [];
-            try {
-                listenerLists = JSON.parse(eeui.getVariate("__i18n::listener", "[]"));
-                if (!(listenerLists instanceof Array)) {
-                    listenerLists = [];
-                }
-            } catch (e) {
-                listenerLists = [];
-            }
-            //
-            listenerLists.forEach((listenerName) => {
-                if (listenerName && listenerName.indexOf("::i18n-change")) {
-                    let pageName = listenerName.substring(0, listenerName.indexOf("::i18n-change"));
-                    eeui.onPageStatusListener({
-                        listenerName: listenerName,
-                        pageName: pageName,
-                        extra: language || "system"
-                    }, listenerName);
-                }
-            });
-        },
-
-        /**
-         * 获取语言
-         * @returns {*}
-         */
-        getLanguage() {
-            return eeui.getCachesString("EEUI_I18N_LANGUAGE", "system");
-        },
-
-        /**
-         * 显示语言
-         * @return {string}
-         */
-        lang(text) {
-            if (typeof this.privateLanguageData[this.privateLanguageType] === "object") {
-                return this.privateLanguageData[this.privateLanguageType][text] || text;
-            }
-            return text;
-        }
+  i18n,
+  data: () => ({
+    i18n: {
+      langs: [{
+        text: '中文',
+        value: 'zh-cn'
+      }, {
+        text: 'English',
+        value: 'en'
+      }, {
+        text: 'ខ្មែរ',
+        value: 'km'
+      }]
     }
-});
+  }),
+  created() {
+    $tools.$on('change_lang', data => {
+      try{
+        // 为啥突然会有this.$i18n为null的场景？？
+        data && this.$i18n && (this.$i18n.locale = data, $Caches.setFreeze('lang', data));
+      }catch(e){
+        console.log(e.message)
+      }
+    })
+  },
+  methods: {
+    // 广播更新语言，触发其他页面的语言更新
+    i18nUpdateAppLang(lang){
+      if(!lang) return false;
+      $tools.$emit('change_lang', lang)
+      // 不加这个当前页面没有更新
+      this.$i18n.locale = lang
+    },
+    // 公用修改语言picker
+    i18nChangeLang() {
+      const langs = [];
+      this.i18n.langs.forEach(lang=> {
+        langs.push(lang.text)
+      })
+      const local = this.$i18n.locale;
+      picker.pick({
+        index: this.i18n.langs.findIndex(item=> item.value == local),
+        items: langs,
+        confirmTitle: this.$t('完成'),
+        cancelTitle: this.$t('取消'),
+      }, ret=> {
+        if(ret.result == 'success') {
+          this.i18nUpdateAppLang(this.i18n.langs[ret.data].value)
+        }
+      })
+    }
+  }
+})

@@ -1,100 +1,80 @@
 <template>
-
-    <div class="app" @lifecycle="lifecycle">
-
-        <!-- 顶部导航 -->
-        <div class="nav">
-            <text class="nav-title">{{title}}</text>
+  <Layout ref="layout" class="app-page">
+    <NavBar title="首页" leftButton="" />
+    <scroller class="list">
+      <div class="info">
+        <div v-for="(item,key) in version" :key="key">
+          <text class="text-normal">{{key}}: {{item}}</text>
         </div>
+      </div>
 
-        <!-- 页面内容 -->
-        <scroller class="app">
-            <text class="app-desc">{{desc}}</text>
-        </scroller>
-
-    </div>
-
+      <button class="btn btn-primary btn-radius" :eeui="{text: '检查热更新'}" @click="checkUpdate"></button>
+      <button class="btn btn-primary btn-radius" :eeui="{text: '录音'}" @click="go('recorder/index.js')"></button>
+    </scroller>
+  </Layout>
 </template>
 
-<style scoped>
-    .app {
-        flex: 1;
-    }
-    .nav {
-        width: 750px;
-        height: 96px;
-        display: flex;
-        background-color: #3EB4FF;
-    }
-    .nav-title {
-        flex: 1;
-        color: #ffffff;
-        text-align: center;
-        line-height: 96px;
-        font-size: 32px;
-        font-weight: 300;
-    }
-    .app-desc {
-        padding: 24px;
-        font-size: 36px;
-    }
-</style>
 <script>
-    const eeui = app.requireModule('eeui');
+import Layout from "@/mixins/layout";
+import NavBar from "@/components/navbar";
+import { jumpPage } from "@/lib/utils";
 
-    export default {
-        data() {
-            return {
-                title: 'Hello, World!',
-                desc: 'Hello, World!  Hello, EEUI! '
-            }
-        },
-
-        mounted() {
-            //页面挂载
-        },
-
-        methods: {
-            /**
-             * 生命周期
-             * @param res
-             */
-            lifecycle(res) {
-                switch (res.status) {
-                    case "ready":
-                        //页面挂载(初始化)
-                        break;
-
-                    case "resume":
-                        //页面激活(恢复)
-                        break;
-
-                    case "pause":
-                        //页面失活(暂停)
-                        break;
-                }
-            },
-
-            /**
-             * 打开新页面
-             * @param jsPageName    (String)JS页面名称
-             * @param params        (Object)传递参数
-             */
-            goForward(jsPageName, params) {
-                eeui.openPage({
-                    url: str + ".js",
-                    pageType: "app",
-                    statusBarColor: "#3EB4FF",
-                    params: params ? params : {}
-                });
-            },
-
-            /**
-             * 返回上一页(关闭当前页)
-             */
-            goBack() {
-                eeui.closePage();
-            },
-        }
+export default {
+  mixins: [Layout],
+  components: {
+    NavBar
+  },
+  data: () => ({
+    version: {
+      version: eeui.getVersion(),
+      versionName: eeui.getVersionName(),
+      localVersion: eeui.getLocalVersion(),
+      localVersionName: eeui.getLocalVersionName(),
+      sdkVersionCode: eeui.getSDKVersionCode(),
+      sdkVersionName: eeui.getSDKVersionName(),
+      updateId: eeui.getUpdateId()
     }
+  }),
+  created() {},
+  methods: {
+    changeLange() {
+      this.i18nChangeLang();
+    },
+    checkUpdate() {
+      const rs = eeui.checkUpdate();
+      console.log(rs);
+    },
+    go(url) {
+      jumpPage(url);
+    }
+  }
+};
 </script>
+
+<style lang="less">
+.list {
+  flex: 1;
+  padding: 30px;
+}
+
+.input {
+  border-width: 1px;
+  border-color: #d7d7d7;
+  margin: 0 30px;
+  width: 690px;
+  height: 88px;
+}
+.input:focus {
+  box-shadow: 0 0 20px 0 red;
+}
+.textarea {
+  border-width: 1px;
+  border-color: #d7d7d7;
+  margin: 0 30px;
+  width: 690px;
+  height: 300px;
+}
+.btn {
+  margin-top: 20px;
+}
+</style>

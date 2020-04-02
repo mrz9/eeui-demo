@@ -1,0 +1,34 @@
+.text-primary {
+  color: @color-primary;
+}
+
+.text-danger {
+  color: @color-danger;
+}
+
+.text-success {
+  color: @color-success;
+}
+
+.text-normal {
+  color: @color-normal;
+}
+.text-warning {
+  color: @color-warning;
+}
+
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-ellipsis { /* weex 都是flex-box 只能用line-clamp来触发 */
+  text-overflow: ellipsis;
+  // white-space: nowrap;
+  // overflow: hidden;
+  lines:1;
+}
