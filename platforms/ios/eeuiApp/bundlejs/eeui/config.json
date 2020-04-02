@@ -1,7 +1,11 @@
 {
 	"serviceUrl": "",
 	"homePage": "",
-	"homePageParams": {},
+	"homePageParams": {
+		"statusBarColor": "#ffffff",
+		"statusBarType": "immersion",
+		"statusBarStyle": false
+	},
 	"appKey": "UMfJinoFPn4o6OOrNLlvWR85NaZTsMvv",
 	"android": {
 		"imageEngine": "picasso"
@@ -9,7 +13,7 @@
 	"styleResources": {
 		"less": "./src/assets/less/common.less"
 	},
-	"socketHost": "192.168.31.52",
-	"socketPort": 8880,
-	"socketHome": "http://192.168.31.52:9990/pages/index.js"
+	"socketHost": "",
+	"socketPort": "",
+	"socketHome": ""
 }

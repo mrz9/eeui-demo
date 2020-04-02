@@ -15,11 +15,6 @@
 			"name": "eeui/geolocation",
 			"url": "http://eeui.cdn.gmjfw.com/uploads/plugins/1/geolocation/2b10f2336bf4efac065f4d0654b657c6.zip"
 		},
-		"eeui/recorder": {
-			"requireName": "eeui/recorder",
-			"name": "eeui/recorder",
-			"url": "http://eeui.cdn.gmjfw.com/uploads/plugins/1/recorder/534f3517a350ec3a7a5b0f23da32f6f6.zip"
-		},
 		"eeui/deviceInfo": {
 			"requireName": "eeui/deviceInfo",
 			"name": "eeui/deviceInfo",
@@ -29,6 +24,11 @@
 			"requireName": "eeui/audio",
 			"name": "eeui/audio",
 			"url": "http://eeui.cdn.gmjfw.com/uploads/plugins/1/audio/d9cfe3f797b93f7186a2fd347250c783.zip"
+		},
+		"eeui/recorder": {
+			"requireName": "eeui/recorder",
+			"name": "eeui/recorder",
+			"url": "http://eeui.cdn.gmjfw.com/uploads/plugins/1/recorder/534f3517a350ec3a7a5b0f23da32f6f6.zip"
 		}
 	}
 }
