@@ -1,0 +1,34 @@
+{
+	"dependencies": {
+		"eeui/lottie": {
+			"requireName": "eeui/lottie",
+			"name": "eeui/lottie",
+			"url": "http://eeui.cdn.gmjfw.com/uploads/plugins/1/lottie/1688257e290c6930721fbb36531d6176.zip"
+		},
+		"eeui/video": {
+			"requireName": "eeui/video",
+			"name": "eeui/video",
+			"url": "http://eeui.cdn.gmjfw.com/uploads/plugins/1/video/e7a54406eb2064ee8faf4d87668f922c.zip"
+		},
+		"eeui/geolocation": {
+			"requireName": "eeui/geolocation",
+			"name": "eeui/geolocation",
+			"url": "http://eeui.cdn.gmjfw.com/uploads/plugins/1/geolocation/2b10f2336bf4efac065f4d0654b657c6.zip"
+		},
+		"eeui/recorder": {
+			"requireName": "eeui/recorder",
+			"name": "eeui/recorder",
+			"url": "http://eeui.cdn.gmjfw.com/uploads/plugins/1/recorder/534f3517a350ec3a7a5b0f23da32f6f6.zip"
+		},
+		"eeui/deviceInfo": {
+			"requireName": "eeui/deviceInfo",
+			"name": "eeui/deviceInfo",
+			"url": "http://eeui.cdn.gmjfw.com/uploads/plugins/1/deviceInfo/fbec02dd10e90fb4b8b8825a4e84e231.zip"
+		},
+		"eeui/audio": {
+			"requireName": "eeui/audio",
+			"name": "eeui/audio",
+			"url": "http://eeui.cdn.gmjfw.com/uploads/plugins/1/audio/d9cfe3f797b93f7186a2fd347250c783.zip"
+		}
+	}
+}

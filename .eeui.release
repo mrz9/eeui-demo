@@ -1,0 +1,8 @@
+{
+	"name": "eeui-demo",
+	"appName": "测试工具",
+	"applicationID": "app.mrz.test",
+	"bundleIdentifier": "app.mrz.test",
+	"release": "2.3.1",
+	"location": "github"
+}

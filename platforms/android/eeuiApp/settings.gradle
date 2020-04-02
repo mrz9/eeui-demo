@@ -1,0 +1,22 @@
+include ':app'
+
+include ":eeui"
+project (':eeui').projectDir = new File("../../../plugins/eeui/framework/android")
+
+include ":eeuiLottie"
+project (":eeuiLottie").projectDir = new File("../../../plugins/eeui/lottie/android")
+
+include ":eeuiVideo"
+project (":eeuiVideo").projectDir = new File("../../../plugins/eeui/video/android")
+
+include ":eeuiGeolocation"
+project (":eeuiGeolocation").projectDir = new File("../../../plugins/eeui/geolocation/android")
+
+include ":eeuiRecorder"
+project (":eeuiRecorder").projectDir = new File("../../../plugins/eeui/recorder/android")
+
+include ":eeuiDeviceInfo"
+project (":eeuiDeviceInfo").projectDir = new File("../../../plugins/eeui/deviceInfo/android")
+
+include ":eeuiAudio"
+project (":eeuiAudio").projectDir = new File("../../../plugins/eeui/audio/android")
