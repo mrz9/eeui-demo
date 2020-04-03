@@ -2,6 +2,7 @@ package eeui.android.recorder.module.recorder;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,12 +56,33 @@ public class Util {
     }
 
     public static File getFile(String fileName) throws IOException {
-        File file = new File(getRootFile(), fileName);
-        if (file.exists()) {
-            file.delete();
-            file.createNewFile();
-        } else {
-            file.createNewFile();
+        File file = null;
+
+        try{
+            File rootPath = getRootFile();
+            File abs = rootPath.getParentFile();
+
+            if (!abs.exists()) {
+                abs.mkdir();
+            }
+            Log.d("debugz",abs.toString());
+            if (!rootPath.exists()) {
+                rootPath.mkdir();
+            }
+            Boolean isExists = rootPath.exists();
+            Log.d("debugz",rootPath.toString() + "  " + isExists.toString());
+            file = new File(rootPath, fileName);
+            Boolean isExists2 = file.exists();
+
+            if (file.exists()) {
+                file.delete();
+                file.createNewFile();
+            } else {
+                file.createNewFile();
+            }
+            Log.d("debugz",file.toString() + "  " + isExists2.toString());
+        }catch (IOException e) {
+            Log.d("debugz", e.getMessage());
         }
         return file;
     }
@@ -74,6 +96,7 @@ public class Util {
     }
 
     public static String getFilePath(String fileName) throws IOException {
+
         File file = new File(getRootFile(), fileName);
         if (file.exists()) {
             file.delete();

@@ -2,6 +2,7 @@ package eeui.android.recorder.module.recorder;
 
 import android.media.AudioFormat;
 import android.media.MediaRecorder;
+import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,8 +69,10 @@ public class RecorderModule {
         } else {
             String time_str = new Date().getTime() + "";
             try {
+                Log.d("debugz",time_str + ".wav");
                 mFile = Util.getFile(time_str + ".wav");
             } catch (IOException e) {
+                Log.d("debugz", e.getMessage());
                 e.printStackTrace();
                 listener.onResult(Util.getError(Constant.MEDIA_INTERNAL_ERROR, Constant.MEDIA_INTERNAL_ERROR_CODE));
             }

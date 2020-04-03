@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.taobao.weex.annotation.JSMethod;
@@ -92,6 +93,7 @@ public class ApprecorderModule extends WXModule {
         RecorderModule.getInstance().start(params, new ModuleResultListener() {
             @Override
             public void onResult(Object o) {
+                Log.d("debugz", o.toString());
                 jsCallback.invoke(o);
             }
         });
