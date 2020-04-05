@@ -82,7 +82,6 @@ dependencies {
     //
     implementation project(":eeui")
     implementation project(":eeuiLottie")
-    implementation project(":eeuiVideo")
     implementation project(":eeuiGeolocation")
     implementation project(":eeuiDeviceInfo")
     implementation project(":eeuiAudio")

@@ -7,7 +7,6 @@ def common
     pod 'SocketRocket', '0.5.1'
     pod 'BindingX', '~> 1.0.3'
     pod 'eeuiLottie', :path => '../../../plugins/eeui/lottie/ios'
-    pod 'eeuiVideo', :path => '../../../plugins/eeui/video/ios'
     pod 'eeuiGeolocation', :path => '../../../plugins/eeui/geolocation/ios'
     pod 'eeuiDeviceInfo', :path => '../../../plugins/eeui/deviceInfo/ios'
     pod 'eeuiAudio', :path => '../../../plugins/eeui/audio/ios'

@@ -5,11 +5,6 @@
 			"name": "eeui/lottie",
 			"url": "http://eeui.cdn.gmjfw.com/uploads/plugins/1/lottie/1688257e290c6930721fbb36531d6176.zip"
 		},
-		"eeui/video": {
-			"requireName": "eeui/video",
-			"name": "eeui/video",
-			"url": "http://eeui.cdn.gmjfw.com/uploads/plugins/1/video/e7a54406eb2064ee8faf4d87668f922c.zip"
-		},
 		"eeui/geolocation": {
 			"requireName": "eeui/geolocation",
 			"name": "eeui/geolocation",

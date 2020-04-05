@@ -10,6 +10,7 @@
 
       <button class="btn btn-primary btn-radius" :eeui="{text: '检查热更新'}" @click="checkUpdate"></button>
       <button class="btn btn-primary btn-radius" :eeui="{text: '录音'}" @click="go('recorder/index.js')"></button>
+      <button class="btn btn-primary btn-radius" :eeui="{text: 'lottie'}" @click="go('lottie/index.js')"></button>
     </scroller>
   </Layout>
 </template>

@@ -13,7 +13,7 @@
 	"styleResources": {
 		"less": "./src/assets/less/common.less"
 	},
-	"socketHost": "",
-	"socketPort": "",
-	"socketHome": ""
+	"socketHost": "192.168.31.52",
+	"socketPort": 8881,
+	"socketHome": "http://192.168.31.52:9991/pages/index.js"
 }
